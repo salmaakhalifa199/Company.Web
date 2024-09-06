@@ -16,7 +16,7 @@ namespace Company.Data.Contexts
 
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)f
         //{
         //    optionsBuilder.UseSqlServer("Server=SALMA\\MSSQLSERVER02;Database=CompanyMVC;Trusted_Connection=True;");
         //}
@@ -24,6 +24,8 @@ namespace Company.Data.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            //modelBuilder.Entity<BaseEntity>().HasQueryFilter(x => !x.IsDeleted);
+
             base.OnModelCreating(modelBuilder);
         }
 

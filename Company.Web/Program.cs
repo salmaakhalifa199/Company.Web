@@ -1,6 +1,8 @@
 using Company.Data.Contexts;
 using Company.Repository.Interfaces;
 using Company.Repository.Repositories;
+using Company.Services.Interfaces;
+using Company.Services.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Company.Web
@@ -39,8 +41,10 @@ namespace Company.Web
             // monsab lw bshtgham haga zy global state  , shared resource(login , cashing , ...)
             #endregion
 
-            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-
+            //builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

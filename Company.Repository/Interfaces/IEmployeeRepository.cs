@@ -17,7 +17,7 @@ namespace Company.Repository.Interfaces
 
         // five operations maybe we needs them in all entities
 
-        //Employee GetEmployeeByName(string name);
-        //IEnumerable<Employee>GetEmployeesByAddress(string address);
+        //IEnumerable<Employee> GetEmployeeByName(string name);
+        //IEnumerable<Employee> GetEmployeesByAddress(string address);
     }
 }

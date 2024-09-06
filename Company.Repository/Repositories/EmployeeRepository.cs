@@ -19,6 +19,7 @@ namespace Company.Repository.Repositories
         #region Constructor injection
         public EmployeeRepository(CompanyDbContext Context) : base(Context)
         {
+            //_context = Context;
         }
         #endregion
 
@@ -36,17 +37,10 @@ namespace Company.Repository.Repositories
 
         #endregion
 
-        //public void Add(Employee employee) => _context.Add(employee);
+        //public IEnumerable<Employee> GetEmployeesByAddress(string address)
+        //   => _context.Employees.Where(x => x.Name.Trim().ToLower().Contains(address.Trim().ToLower())).ToList();
 
-        //public void Delete(Employee employee) => _context.Remove(employee);
-
-
-        //public IEnumerable<Employee> GetAll() => _context.Employees.ToList();
-
-
-        //public Employee GetById(int id) => _context.Employees.FirstOrDefault(x => x.Id == id);
-        //// or _context.Employees.Find(id);
-        //public void Update(Employee employee) => _context.Update(employee);
-
+        //public IEnumerable<Employee> GetEmployeeByName(string name)
+        //  => _context.Employees.Where(x => x.Name.Trim().ToLower().Contains(name.Trim().ToLower())).ToList();
     }
 }

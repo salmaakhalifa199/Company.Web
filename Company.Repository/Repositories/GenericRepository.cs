@@ -1,9 +1,11 @@
 ﻿using Company.Data.Contexts;
 using Company.Data.Entities;
 using Company.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,19 +20,19 @@ namespace Company.Repository.Repositories
             _context = context;
         }
         public void Add(T entity)
-         //=> _context.Add(entity);
-         => _context.Set<T>().Add(entity);
+        => _context.Set<T>().Add(entity);
 
         public void Delete(T entity)
-         => _context.Set<T>().Remove(entity);
+        => _context.Set<T>().Remove(entity);
 
         public IEnumerable<T> GetAll()
-        => _context.Set<T>().ToList();
+          => _context.Set<T>().ToList();
+        
+        public T GetById(int? id)
+          => _context.Set<T>().Find(id);
 
-        public T GetById(int id)
-        => _context.Set<T>().Find(id);
         public void Update(T entity)
-       => _context.Set<T>().Update(entity);
+        => _context.Set<T>().Update(entity);
     }
 
     #region Notes
