@@ -19,7 +19,7 @@ namespace Company.Repository.Repositories
         #region Constructor injection
         public EmployeeRepository(CompanyDbContext Context) : base(Context)
         {
-            //_context = Context;
+            _context = Context;
         }
         #endregion
 
@@ -40,7 +40,11 @@ namespace Company.Repository.Repositories
         //public IEnumerable<Employee> GetEmployeesByAddress(string address)
         //   => _context.Employees.Where(x => x.Name.Trim().ToLower().Contains(address.Trim().ToLower())).ToList();
 
-        //public IEnumerable<Employee> GetEmployeeByName(string name)
-        //  => _context.Employees.Where(x => x.Name.Trim().ToLower().Contains(name.Trim().ToLower())).ToList();
+        public IEnumerable<Employee> GetEmployeesByName(string name)
+          => _context.Employees.Where(x => x.Name.Trim().ToLower().Contains(name.Trim().ToLower()) ||
+           x.Email.Trim().ToLower().Contains(name.Trim().ToLower()) ||
+           x.Address.Trim().ToLower().Contains(name.Trim().ToLower())
+
+            ).ToList();
     }
 }

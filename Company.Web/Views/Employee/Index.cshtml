@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Employee>
+﻿@model IEnumerable<EmployeeDto>
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,16 +7,26 @@
 <br />
 <br />
 <a asp-controller="Employee" asp-action="Create" class=" btn btn-primary"> Create New Employee </a>
-@* 
+
 <div class="row justify-content-center align-items-center mt-5" >
     <form class="row col-8 offset-2" asp-action="Index">
         <div class="col-8">
-            <index type="text" class="form-control" name="searchInp" placeholder="Search By Name" />
+            <input type="text" class="form-control" name="searchInp" placeholder="Search By Name" />
         </div>
         <div class="col-4">
             <input type="submit" value="Search" class="btn btn-success w-100" />
         </div>
     </form>
+</div>
+
+@* <div class="mt-5 alert alert-warning">
+    <h3> @ViewBag.Message </h3>>
+</div>
+<div class="mt-5 alert alert-primary">
+    <h3> @ViewData["TextMessage"] </h3>>
+</div>
+<div class="mt-5 alert alert-dark">
+    <h3> @TempData["TextTempMessage"] </h3>>
 </div> *@
 
 @if (Model?.Count() > 0)
@@ -25,13 +35,15 @@
         <thead>
             <tr>
                 <th> @Html.DisplayNameFor(D => D.Name)</th>
+                <th> @Html.DisplayNameFor(D => D.Image)</th>
                 <th> @Html.DisplayNameFor(D => D.Age)</th>
                 <th> @Html.DisplayNameFor(D => D.Address)</th>
                 <th> @Html.DisplayNameFor(D => D.Salary)</th>
                  <th> @Html.DisplayNameFor(D => D.Email)</th>
                 <th> @Html.DisplayNameFor(D => D.PhoneNumber)</th>
                 <th> @Html.DisplayNameFor(D => D.HiringDate)</th>
-               
+          
+
                 <th> Details</th>
                 <th> Update</th>
                 <th> Delete</th>
@@ -42,28 +54,17 @@
             {
                 <tr>
                     <td>@employee.Name</td>
+                    <td>
+                        <img src="/Files/Images/@employee.ImageUrl" height="40" width="40" /> @*lw bakhzn el path kaml fi el db*@
+                    </td>
                     <td>@employee.Age</td>
                     <td>@employee.Address</td>
-                    <td>@employee.Salary</td>
-                    <td>@employee.Email</td>
+                    <td>@Html.DisplayFor(M=> employee.Salary)</td>
+                    <td>@Html.DisplayFor(M => employee.Email)</td>
                     <td>@employee.PhoneNumber</td>
                     <td>@employee.HiringDate</td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@employee.Id" class="btn btn-warning">
-                            <i class="fas fa-eye"></i> Details
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-action="Update" asp-route-id="@employee.Id" class="btn btn-success">
-                            <i class="fas fa-edit"></i> Update
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-danger"
-                           onclick="return confirm('Are you sure you want to delete this employee?');">
-                            Delete
-                        </a>
-                    </td>
+                  
+                    <partial name="_ActionButtonsPartialView" model="@employee.Id.ToString()" />
                 </tr>
             }
         </tbody>

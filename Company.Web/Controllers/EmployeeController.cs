@@ -1,57 +1,81 @@
 ﻿using Company.Data.Entities;
+using Company.Services.Helper;
 using Company.Services.Interfaces;
+using Company.Services.Interfaces.Employee.Dto;
 using Company.Services.Services;
+using Company.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.Drawing;
 
 namespace Company.Web.Controllers
 {
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;
+        private readonly IDepartmentService _departmentService;
+       
 
-        public EmployeeController(IEmployeeService employeeService)
+        public EmployeeController(IEmployeeService employeeService, IDepartmentService departmentService)
         {
             _employeeService = employeeService;
+            _departmentService = departmentService;
+         
         }
-        public IActionResult Index()
-        {
-            //IEnumerable<Employee> employees = new List<Employee>();
-            var employees = _employeeService.GetAll();  
+        public IActionResult Index(string searchInp)
+        {   //ViewBag,ViewTemp,TempData
+            //ViewBag.Message = "Hello From EmployeeDto Index(ViewBag)";
+
+            //ViewData["TextMessage"] = "Hello From EmployeeDto Index (ViewData)";
+
+
+            IEnumerable<EmployeeDto> employees = new List<EmployeeDto>();
+            if(string.IsNullOrEmpty(searchInp))
+            {
+                employees = _employeeService.GetAll();
+            }
+            else
+            {
+                employees = _employeeService.GetEmployeesByName(searchInp);
+            }
             return View(employees);
+          
 
         }
         [HttpGet]
         public IActionResult Create()
         {
-            return View(new Employee());
+            //ViewBag,ViewTemp,TempData
+            ViewBag.Departments = _departmentService.GetAll();
+            return View();
         }
-
+       
         [HttpPost]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create(EmployeeDto EmployeeDto)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _employeeService.Add(employee);
-                    return RedirectToAction(nameof(Index));        }
-                return View(employee);
+                    _employeeService.Add(EmployeeDto);
+                    return RedirectToAction(nameof(Index));      
+                }
+                return View(EmployeeDto);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("EmployeeError", ex.Message);
-                return View(employee);
+                return View(EmployeeDto);
             }
         }
 
 
         public IActionResult Details(int? id, string viewName = "Details")
         {
-            var employee = _employeeService.GetById(id);
-            if (employee is null)
+            var EmployeeDto = _employeeService.GetById(id);
+            if (EmployeeDto is null)
                 return RedirectToAction("NotFoundPage", null, "Home");
 
-            return View(viewName, employee);
+            return View(viewName, EmployeeDto);
 
         }
         public IActionResult Update(int? id)
@@ -62,12 +86,12 @@ namespace Company.Web.Controllers
             return Details(id, "Update");
         }
         [HttpPost]
-        public IActionResult Update(int? id, Employee employee)
+        public IActionResult Update(int? id, EmployeeDto EmployeeDto)
         {
-            if (employee.Id != id)
+            if (EmployeeDto.Id != id)
                 return RedirectToAction("NotFoundPage", null, "Home");
 
-            _employeeService.Update(employee);
+            _employeeService.Update(EmployeeDto);
 
             return RedirectToAction(nameof(Index));
         }
@@ -77,12 +101,21 @@ namespace Company.Web.Controllers
             if (id is null)
                 return BadRequest();
 
-            var employee = _employeeService.GetById(id);
-            if (employee is null)
+            var EmployeeDto = _employeeService.GetById(id);
+            if (EmployeeDto is null)
                 return RedirectToAction("NotFoundPage", null, "Home");
 
-            _employeeService.Delete(employee);
+            _employeeService.Delete(EmployeeDto);
 
+            if (!string.IsNullOrEmpty(EmployeeDto.ImageUrl))
+            {
+                string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Files", "Images");
+                var filePath = Path.Combine(folderPath, EmployeeDto.ImageUrl);
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+            }
             return RedirectToAction(nameof(Index));
         }
     }

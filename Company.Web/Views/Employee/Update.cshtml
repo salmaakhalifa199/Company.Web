@@ -1,4 +1,4 @@
-﻿@model Company.Data.Entities.Employee
+﻿@model EmployeeDto
 
 @{
     ViewData["Title"] = "Update";
@@ -46,11 +46,6 @@
                 <label asp-for="HiringDate" class="control-label"></label>
                 <input asp-for="HiringDate" class="form-control" />
                 <span asp-validation-for="HiringDate" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
