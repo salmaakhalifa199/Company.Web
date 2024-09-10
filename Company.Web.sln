@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35201.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Web", "Company.Web\Company.Web.csproj", "{5AA55C0A-EB31-4740-81A4-6E3B2DDA3673}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Company.Web", "Company.Web\Company.Web.csproj", "{5AA55C0A-EB31-4740-81A4-6E3B2DDA3673}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Data", "Data.Models\Company.Data.csproj", "{17207210-99B2-4326-B6A9-FD30FA502E6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Company.Data", "Data.Models\Company.Data.csproj", "{17207210-99B2-4326-B6A9-FD30FA502E6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Repository", "Company.Repository\Company.Repository.csproj", "{E263F72D-79E0-4A1B-9252-41E41D7ECAE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Company.Repository", "Company.Repository\Company.Repository.csproj", "{E263F72D-79E0-4A1B-9252-41E41D7ECAE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Services", "Company.Services\Company.Services.csproj", "{269FD91D-DB14-4093-BC98-C94CBAF35099}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Company.Services", "Company.Services\Company.Services.csproj", "{269FD91D-DB14-4093-BC98-C94CBAF35099}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

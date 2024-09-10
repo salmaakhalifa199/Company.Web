@@ -43,6 +43,7 @@ namespace Company.Web.Controllers
 
         }
         [HttpGet]
+        [ValidateAntiForgeryToken]
         public IActionResult Create()
         {
             //ViewBag,ViewTemp,TempData
