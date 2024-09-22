@@ -39,7 +39,7 @@ namespace Company.Web.Controllers
                 var result = await _userManager.CreateAsync(user, input.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("SignIn");
+                    return RedirectToAction("Login");
                 }
                 foreach(var error in result.Errors)
                 {
@@ -154,5 +154,11 @@ namespace Company.Web.Controllers
             }
             return View(input);
         }
+
+        public IActionResult AccessDenied() 
+        {
+            return View();
+        }
+
     }
 }
